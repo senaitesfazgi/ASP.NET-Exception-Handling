@@ -41,6 +41,16 @@ namespace School.API.Controllers
             }
         }
 
+        [HttpGet("get-student-by-id/{id}")]
+        public IActionResult GetStudentById(int id)
+        {
+
+            var studentInfo = _context.Students.FirstOrDefault(n => n.Id == id);
+            var studentFullName = studentInfo.FullName;
+
+            return Ok($"Student name = {studentFullName}");
+        }
+
         [HttpPost("add-new-student")]
         public IActionResult AddNewStudent([FromBody]Student payload)
         {
@@ -50,5 +60,6 @@ namespace School.API.Controllers
 
             return Created("", null);
         }
+
     }
 }
